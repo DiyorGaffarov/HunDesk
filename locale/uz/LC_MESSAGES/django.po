@@ -505,3 +505,15 @@ msgstr "Yuklangan video yoki video havolalardan birini tanlang, ikkalasini birga
 
 msgid "Uploaded video will be removed after you click Save."
 msgstr "Saqlash tugmasini bosgandan so'ng yuklangan video o'chiriladi."
+
+msgid "Mark as read"
+msgstr "O'qilgan deb belgilash"
+
+msgid "Mark as unread"
+msgstr "O'qilmagan deb belgilash"
+
+msgid "Marked as read."
+msgstr "O'qilgan deb belgilandi."
+
+msgid "Marked as unread."
+msgstr "O'qilmagan deb belgilandi."

@@ -8,6 +8,7 @@ urlpatterns = [
     path("", views.tutorial_list, name="tutorial-list"),
     path("create/", views.tutorial_create, name="tutorial-create"),
     path("<int:pk>/", views.tutorial_detail, name="tutorial-detail"),
+    path("<int:pk>/toggle-read/", views.tutorial_toggle_read, name="tutorial-toggle-read"),
     path("<int:pk>/edit/", views.tutorial_update, name="tutorial-edit"),
     path("<int:pk>/delete/", views.tutorial_delete, name="tutorial-delete"),
 ]

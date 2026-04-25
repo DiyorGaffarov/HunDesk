@@ -4,6 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_POST
 
 from accounts.models import User
 from accounts.permissions import can_manage_tutorial
@@ -71,10 +72,34 @@ def tutorial_detail(request, pk: int):
     if not _can_view_tutorial(request.user, tutorial):
         raise PermissionDenied
 
+    is_read = False
     if request.user.role == User.Role.USER:
-        ReadHistory.objects.create(user=request.user, tutorial=tutorial)
+        is_read = ReadHistory.objects.filter(user=request.user, tutorial=tutorial).exists()
 
-    return render(request, "knowledgebase/tutorial_detail.html", {"tutorial": tutorial})
+    return render(
+        request,
+        "knowledgebase/tutorial_detail.html",
+        {"tutorial": tutorial, "is_read": is_read},
+    )
+
+
+@login_required
+@require_POST
+def tutorial_toggle_read(request, pk: int):
+    tutorial = get_object_or_404(Tutorial, pk=pk)
+    if request.user.role != User.Role.USER:
+        raise PermissionDenied
+    if not _can_view_tutorial(request.user, tutorial):
+        raise PermissionDenied
+
+    read_item = ReadHistory.objects.filter(user=request.user, tutorial=tutorial).first()
+    if read_item:
+        read_item.delete()
+        messages.info(request, _("Marked as unread."))
+    else:
+        ReadHistory.objects.create(user=request.user, tutorial=tutorial)
+        messages.success(request, _("Marked as read."))
+    return redirect("knowledgebase:tutorial-detail", pk=pk)
 
 
 @login_required

@@ -12,12 +12,22 @@
                 {{ tutorial.department.name }} | {% trans "By" %} {{ tutorial.created_by.display_name|default:tutorial.created_by.username }}
             </div>
         </div>
-        {% if user.role == "ADMIN" or user.role == "EDITOR" and user.department_id == tutorial.department_id %}
         <div class="d-flex gap-2">
-            <a class="btn btn-sm btn-outline-primary" href="{% url 'knowledgebase:tutorial-edit' tutorial.id %}">{% trans "Edit" %}</a>
-            <a class="btn btn-sm btn-outline-danger" href="{% url 'knowledgebase:tutorial-delete' tutorial.id %}">{% trans "Delete" %}</a>
+            {% if user.role == "USER" %}
+                <form method="post" action="{% url 'knowledgebase:tutorial-toggle-read' tutorial.id %}">
+                    {% csrf_token %}
+                    {% if is_read %}
+                        <button class="btn btn-sm btn-outline-secondary" type="submit">{% trans "Mark as unread" %}</button>
+                    {% else %}
+                        <button class="btn btn-sm btn-success" type="submit">{% trans "Mark as read" %}</button>
+                    {% endif %}
+                </form>
+            {% endif %}
+            {% if user.role == "ADMIN" or user.role == "EDITOR" and user.department_id == tutorial.department_id %}
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'knowledgebase:tutorial-edit' tutorial.id %}">{% trans "Edit" %}</a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'knowledgebase:tutorial-delete' tutorial.id %}">{% trans "Delete" %}</a>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
     {% if tutorial.description %}

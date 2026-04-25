@@ -90,6 +90,12 @@ class ReadHistory(models.Model):
         ordering = ("-read_at",)
         verbose_name = _("read history")
         verbose_name_plural = _("read history")
+        constraints = [
+            models.UniqueConstraint(
+                fields=("user", "tutorial"),
+                name="unique_readhistory_user_tutorial",
+            )
+        ]
 
     def __str__(self) -> str:
         return f"{self.user.username} - {self.tutorial.title}"
