@@ -1,5 +1,9 @@
+import logging
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+logger = logging.getLogger(__name__)
 
 
 class Tutorial(models.Model):
@@ -34,6 +38,16 @@ class Tutorial(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def delete(self, *args, **kwargs):
+        video_storage = self.video_file.storage if self.video_file else None
+        video_name = self.video_file.name if self.video_file else ""
+        super().delete(*args, **kwargs)
+        if video_storage and video_name:
+            try:
+                video_storage.delete(video_name)
+            except OSError:
+                logger.warning("Could not delete tutorial video '%s'", video_name, exc_info=True)
+
 
 class TutorialImage(models.Model):
     tutorial = models.ForeignKey(
@@ -51,6 +65,16 @@ class TutorialImage(models.Model):
 
     def __str__(self) -> str:
         return self.caption or self.tutorial.title
+
+    def delete(self, *args, **kwargs):
+        image_storage = self.image.storage if self.image else None
+        image_name = self.image.name if self.image else ""
+        super().delete(*args, **kwargs)
+        if image_storage and image_name:
+            try:
+                image_storage.delete(image_name)
+            except OSError:
+                logger.warning("Could not delete tutorial image '%s'", image_name, exc_info=True)
 
 
 class TutorialVideo(models.Model):

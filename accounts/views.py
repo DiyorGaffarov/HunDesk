@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import translate_url
@@ -20,7 +21,9 @@ from accounts.forms import (
     ProfileUpdateForm,
 )
 from accounts.models import User
-from accounts.permissions import can_editor_manage_user
+from accounts.permissions import can_editor_manage_user, ensure_department_assignment
+
+USERS_PER_PAGE = 20
 
 
 @require_POST
@@ -64,6 +67,7 @@ def login_view(request):
 
 
 @login_required
+@require_POST
 def logout_view(request):
     logout(request)
     return redirect("accounts:login")
@@ -74,6 +78,7 @@ def user_list(request):
     if request.user.role == User.Role.ADMIN:
         users = User.objects.select_related("department").all()
     elif request.user.role == User.Role.EDITOR:
+        ensure_department_assignment(request.user)
         users = User.objects.select_related("department").filter(department=request.user.department)
     else:
         raise PermissionDenied
@@ -86,12 +91,15 @@ def user_list(request):
             | Q(email__icontains=q)
             | Q(department__name__icontains=q)
         )
+    users = users.order_by("username")
+    page_obj = Paginator(users, USERS_PER_PAGE).get_page(request.GET.get("page"))
 
     return render(
         request,
         "accounts/user_list.html",
         {
-            "users": users.order_by("username"),
+            "users": page_obj,
+            "page_obj": page_obj,
             "query": q,
         },
     )
@@ -102,6 +110,7 @@ def user_create(request):
     if request.user.role == User.Role.ADMIN:
         form = AdminUserCreateForm(request.POST or None, request.FILES or None)
     elif request.user.role == User.Role.EDITOR:
+        ensure_department_assignment(request.user)
         form = EditorUserCreateForm(
             request.POST or None,
             request.FILES or None,
@@ -185,6 +194,13 @@ def profile_view(request):
 
     history = (
         ReadHistory.objects.select_related("tutorial", "tutorial__department")
+        .defer(
+            "tutorial__content",
+            "tutorial__description",
+            "tutorial__video_file",
+            "tutorial__video_caption",
+            "tutorial__video_url",
+        )
         .filter(user=request.user)
         .order_by("-read_at")[:15]
     )
@@ -193,6 +209,10 @@ def profile_view(request):
 
 @login_required
 def profile_update(request):
+    if request.user.role in {User.Role.EDITOR, User.Role.USER} and not request.user.department_id:
+        messages.error(request, _("Your account is missing a department. Contact an administrator."))
+        return redirect("accounts:profile")
+
     form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user)
     if request.method == "POST" and form.is_valid():
         form.save()

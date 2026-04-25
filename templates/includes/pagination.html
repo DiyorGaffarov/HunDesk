@@ -1,0 +1,43 @@
+{% load i18n %}
+{% if page_obj and page_obj.paginator.num_pages > 1 %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-3">
+    <p class="small text-muted mb-0">
+        {% blocktrans with start=page_obj.start_index end=page_obj.end_index total=page_obj.paginator.count %}
+            Showing {{ start }}-{{ end }} of {{ total }}
+        {% endblocktrans %}
+    </p>
+    <nav aria-label="{% trans 'Pagination' %}">
+        <ul class="pagination pagination-sm mb-0">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query %}q={{ query|urlencode }}&{% endif %}page=1">{% trans "First" %}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query %}q={{ query|urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">{% trans "First" %}</span></li>
+                <li class="page-item disabled"><span class="page-link">{% trans "Previous" %}</span></li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">
+                    {% blocktrans with current=page_obj.number total=page_obj.paginator.num_pages %}Page {{ current }} of {{ total }}{% endblocktrans %}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query %}q={{ query|urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query %}q={{ query|urlencode }}&{% endif %}page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">{% trans "Next" %}</span></li>
+                <li class="page-item disabled"><span class="page-link">{% trans "Last" %}</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}

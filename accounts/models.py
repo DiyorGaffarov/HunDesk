@@ -41,7 +41,7 @@ class User(AbstractUser):
     def clean(self):
         super().clean()
         if self.role in {self.Role.EDITOR, self.Role.USER} and not self.department:
-            raise ValidationError({"department": _("Department is required for Editor and User roles.")})
+            raise ValidationError(_("Department is required for Editor and User roles."))
 
     @property
     def display_name(self):

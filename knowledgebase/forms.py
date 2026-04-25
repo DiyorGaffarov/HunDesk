@@ -41,7 +41,7 @@ class TutorialForm(forms.ModelForm):
                 pk=current_user.department_id
             )
             self.fields["department"].initial = current_user.department
-            self.fields["department"].widget.attrs["readonly"] = True
+            self.fields["department"].disabled = True
 
         self.fields["video_file"].help_text = _("Upload one video file (optional).")
         self.fields["video_caption"].help_text = _("Short caption for uploaded video.")

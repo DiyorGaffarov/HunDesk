@@ -14,6 +14,12 @@ class BootstrapFormMixin:
             field.widget.attrs["class"] = css_class
 
 
+def _sync_role_flags(user: User) -> None:
+    is_admin = user.role == User.Role.ADMIN
+    user.is_staff = is_admin
+    user.is_superuser = is_admin
+
+
 class LoginForm(AuthenticationForm, BootstrapFormMixin):
     username = forms.CharField(label=_("Username"))
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
@@ -42,6 +48,13 @@ class AdminUserCreateForm(UserCreationForm, BootstrapFormMixin):
         super().__init__(*args, **kwargs)
         self._apply_bootstrap()
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        _sync_role_flags(user)
+        if commit:
+            user.save()
+        return user
+
 
 class EditorUserCreateForm(UserCreationForm, BootstrapFormMixin):
     class Meta:
@@ -59,12 +72,23 @@ class EditorUserCreateForm(UserCreationForm, BootstrapFormMixin):
     def __init__(self, *args, department=None, **kwargs):
         self.department = department
         super().__init__(*args, **kwargs)
+        self.instance.role = User.Role.USER
+        self.instance.department = department
         self._apply_bootstrap()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if not self.department:
+            raise forms.ValidationError(_("Your account has no department. Contact an administrator."))
+        self.instance.role = User.Role.USER
+        self.instance.department = self.department
+        return cleaned_data
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.role = User.Role.USER
         user.department = self.department
+        _sync_role_flags(user)
         if commit:
             user.save()
         return user
@@ -89,6 +113,13 @@ class AdminUserUpdateForm(UserChangeForm, BootstrapFormMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._apply_bootstrap()
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        _sync_role_flags(user)
+        if commit:
+            user.save()
+        return user
 
 
 class EditorManagedUserUpdateForm(forms.ModelForm, BootstrapFormMixin):

@@ -44,7 +44,10 @@
                 <a class="btn btn-sm btn-outline-primary" href="{% url 'accounts:profile' %}">
                     {{ user.display_name|default:user.username }}
                 </a>
-                <a class="btn btn-sm btn-danger" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
+                <form action="{% url 'accounts:logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger" type="submit">{% trans "Logout" %}</button>
+                </form>
             </div>
         </nav>
         {% include "includes/messages.html" %}

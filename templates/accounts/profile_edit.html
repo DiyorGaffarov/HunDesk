@@ -8,6 +8,9 @@
     <h1 class="h5 mb-3">{% trans "Edit Profile" %}</h1>
     <form method="post" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
         {% for field in form %}
             <div class="mb-3">
                 <label class="form-label">{{ field.label }}</label>
