@@ -27,6 +27,14 @@ def can_editor_manage_user(editor: User, target: User) -> bool:
     )
 
 
+def can_editor_view_user(editor: User, target: User) -> bool:
+    return (
+        editor.role == User.Role.EDITOR
+        and editor.department_id is not None
+        and editor.department_id == target.department_id
+    )
+
+
 def can_manage_tutorial(user: User, tutorial_department_id: int) -> bool:
     if user.role == User.Role.ADMIN:
         return True

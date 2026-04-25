@@ -518,3 +518,15 @@ msgstr "Отмечено как прочитанное."
 
 msgid "Marked as unread."
 msgstr "Отмечено как непрочитанное."
+
+msgid "User Profile"
+msgstr "Профиль пользователя"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Active"
+msgstr "Активен"
+
+msgid "Read Tutorials History"
+msgstr "История прочитанных руководств"

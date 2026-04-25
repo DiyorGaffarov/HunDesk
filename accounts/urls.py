@@ -10,6 +10,7 @@ urlpatterns = [
     path("logout/", views.logout_view, name="logout"),
     path("users/", views.user_list, name="user-list"),
     path("users/create/", views.user_create, name="user-create"),
+    path("users/<int:pk>/", views.user_detail, name="user-detail"),
     path("users/<int:pk>/edit/", views.user_update, name="user-edit"),
     path("users/<int:pk>/delete/", views.user_delete, name="user-delete"),
     path("profile/", views.profile_view, name="profile"),

@@ -21,7 +21,11 @@ from accounts.forms import (
     ProfileUpdateForm,
 )
 from accounts.models import User
-from accounts.permissions import can_editor_manage_user, ensure_department_assignment
+from accounts.permissions import (
+    can_editor_manage_user,
+    can_editor_view_user,
+    ensure_department_assignment,
+)
 
 USERS_PER_PAGE = 20
 
@@ -101,6 +105,43 @@ def user_list(request):
             "users": page_obj,
             "page_obj": page_obj,
             "query": q,
+        },
+    )
+
+
+@login_required
+def user_detail(request, pk: int):
+    target_user = get_object_or_404(User.objects.select_related("department"), pk=pk)
+
+    if request.user.role == User.Role.ADMIN:
+        pass
+    elif can_editor_view_user(request.user, target_user):
+        pass
+    else:
+        raise PermissionDenied
+
+    from knowledgebase.models import ReadHistory
+
+    history = (
+        ReadHistory.objects.select_related("tutorial", "tutorial__department")
+        .defer(
+            "tutorial__content",
+            "tutorial__description",
+            "tutorial__video_file",
+            "tutorial__video_caption",
+            "tutorial__video_url",
+        )
+        .filter(user=target_user)
+        .order_by("-read_at")[:30]
+    )
+    can_edit_user = request.user.role == User.Role.ADMIN or can_editor_manage_user(request.user, target_user)
+    return render(
+        request,
+        "accounts/user_detail.html",
+        {
+            "target_user": target_user,
+            "history": history,
+            "can_edit_user": can_edit_user,
         },
     )
 

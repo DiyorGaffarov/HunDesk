@@ -39,6 +39,7 @@
                     <td><span class="badge badge-soft">{{ user_item.get_role_display }}</span></td>
                     <td>{{ user_item.department|default:"-" }}</td>
                     <td class="text-end">
+                        <a class="btn btn-sm btn-outline-info" href="{% url 'accounts:user-detail' user_item.id %}">{% trans "View" %}</a>
                         <a class="btn btn-sm btn-outline-primary" href="{% url 'accounts:user-edit' user_item.id %}">{% trans "Edit" %}</a>
                         <a class="btn btn-sm btn-outline-danger" href="{% url 'accounts:user-delete' user_item.id %}">{% trans "Delete" %}</a>
                     </td>

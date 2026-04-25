@@ -517,3 +517,15 @@ msgstr "O'qilgan deb belgilandi."
 
 msgid "Marked as unread."
 msgstr "O'qilmagan deb belgilandi."
+
+msgid "User Profile"
+msgstr "Foydalanuvchi profili"
+
+msgid "Back"
+msgstr "Orqaga"
+
+msgid "Active"
+msgstr "Faol"
+
+msgid "Read Tutorials History"
+msgstr "O'qilgan qo'llanmalar tarixi"
