@@ -23,7 +23,7 @@ def admin_dashboard(request):
         raise PermissionDenied
     context = {
         "total_departments": Department.objects.count(),
-        "total_users": User.objects.count(),
+        "total_users": User.objects.filter(role=User.Role.USER).count(),
         "total_editors": User.objects.filter(role=User.Role.EDITOR).count(),
         "total_tutorials": Tutorial.objects.count(),
         "latest_tutorials": Tutorial.objects.select_related("department")
