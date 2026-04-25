@@ -1,0 +1,22 @@
+{% load i18n %}
+<nav class="nav flex-column gap-1">
+    <a class="kb-nav-link {% if request.resolver_match.namespace == 'dashboard' %}active{% endif %}" href="{% url 'dashboard:home' %}">
+        {% trans "Dashboard" %}
+    </a>
+    <a class="kb-nav-link {% if request.resolver_match.namespace == 'knowledgebase' %}active{% endif %}" href="{% url 'knowledgebase:tutorial-list' %}">
+        {% trans "Tutorials" %}
+    </a>
+    {% if user.role == "ADMIN" or user.role == "EDITOR" %}
+    <a class="kb-nav-link {% if request.resolver_match.namespace == 'accounts' and 'user' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'accounts:user-list' %}">
+        {% trans "Users" %}
+    </a>
+    {% endif %}
+    {% if user.role == "ADMIN" %}
+    <a class="kb-nav-link {% if request.resolver_match.namespace == 'departments' %}active{% endif %}" href="{% url 'departments:list' %}">
+        {% trans "Departments" %}
+    </a>
+    {% endif %}
+    <a class="kb-nav-link {% if request.resolver_match.namespace == 'accounts' and 'profile' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'accounts:profile' %}">
+        {% trans "Profile" %}
+    </a>
+</nav>

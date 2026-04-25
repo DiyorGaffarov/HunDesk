@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete User" %}{% endblock %}
+
+{% block content %}
+<section class="kb-card">
+    <h1 class="h5">{% trans "Delete User" %}</h1>
+    <p class="text-muted">
+        {% blocktrans with username=target_user.username %}Are you sure you want to delete user "{{ username }}"?{% endblocktrans %}
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">{% trans "Delete" %}</button>
+        <a class="btn btn-outline-secondary" href="{% url 'accounts:user-list' %}">{% trans "Cancel" %}</a>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete Tutorial" %}{% endblock %}
+
+{% block content %}
+<section class="kb-card">
+    <h1 class="h5">{% trans "Delete Tutorial" %}</h1>
+    <p class="text-muted">
+        {% blocktrans with title=tutorial.title %}Are you sure you want to delete tutorial "{{ title }}"?{% endblocktrans %}
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">{% trans "Delete" %}</button>
+        <a class="btn btn-outline-secondary" href="{% url 'knowledgebase:tutorial-list' %}">{% trans "Cancel" %}</a>
+    </form>
+</section>
+{% endblock %}

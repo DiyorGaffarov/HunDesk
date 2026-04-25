@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Users" %}{% endblock %}
+
+{% block content %}
+<section class="kb-card">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+        <h1 class="h5 mb-0">{% trans "User Management" %}</h1>
+        <a class="btn btn-primary" href="{% url 'accounts:user-create' %}">{% trans "Create User" %}</a>
+    </div>
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-sm-10 col-md-8">
+            <input class="form-control" type="text" name="q" value="{{ query }}" placeholder="{% trans 'Search by username, full name, email...' %}">
+        </div>
+        <div class="col-sm-2 col-md-2">
+            <button class="btn btn-outline-secondary w-100" type="submit">{% trans "Search" %}</button>
+        </div>
+    </form>
+
+    <div class="table-wrap">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Username" %}</th>
+                    <th>{% trans "Full Name" %}</th>
+                    <th>{% trans "Email" %}</th>
+                    <th>{% trans "Role" %}</th>
+                    <th>{% trans "Department" %}</th>
+                    <th class="text-end">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_item in users %}
+                <tr>
+                    <td>{{ user_item.username }}</td>
+                    <td>{{ user_item.full_name|default:"-" }}</td>
+                    <td>{{ user_item.email }}</td>
+                    <td><span class="badge badge-soft">{{ user_item.get_role_display }}</span></td>
+                    <td>{{ user_item.department|default:"-" }}</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'accounts:user-edit' user_item.id %}">{% trans "Edit" %}</a>
+                        <a class="btn btn-sm btn-outline-danger" href="{% url 'accounts:user-delete' user_item.id %}">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center text-muted py-4">{% trans "No users found." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

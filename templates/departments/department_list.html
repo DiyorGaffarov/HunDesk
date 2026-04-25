@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Departments" %}{% endblock %}
+
+{% block content %}
+<section class="kb-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h5 mb-0">{% trans "Departments" %}</h1>
+        <a class="btn btn-primary" href="{% url 'departments:create' %}">{% trans "Create Department" %}</a>
+    </div>
+    <div class="table-wrap">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Description" %}</th>
+                    <th>{% trans "Created At" %}</th>
+                    <th class="text-end">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                    <tr>
+                        <td>{{ department.name }}</td>
+                        <td>{{ department.description|default:"-" }}</td>
+                        <td>{{ department.created_at|date:"Y-m-d" }}</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'departments:edit' department.id %}">{% trans "Edit" %}</a>
+                            <a class="btn btn-sm btn-outline-danger" href="{% url 'departments:delete' department.id %}">{% trans "Delete" %}</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td class="text-center text-muted py-4" colspan="4">{% trans "No departments yet." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

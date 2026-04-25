@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% if is_create %}{% trans "Create Tutorial" %}{% else %}{% trans "Edit Tutorial" %}{% endif %}{% endblock %}
+
+{% block content %}
+<section class="kb-card">
+    <h1 class="h5 mb-3">
+        {% if is_create %}{% trans "Create Tutorial" %}{% else %}{% trans "Edit Tutorial" %}: {{ tutorial.title }}{% endif %}
+    </h1>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="tutorial-form-section">
+            <h2 class="h6 mb-3">{% trans "Tutorial Content" %}</h2>
+
+            <div class="mb-3">
+                <label class="form-label">{{ form.title.label }}</label>
+                {{ form.title }}
+                {% if form.title.errors %}<div class="text-danger small">{{ form.title.errors|join:", " }}</div>{% endif %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ form.description.label }}</label>
+                {{ form.description }}
+                {% if form.description.errors %}<div class="text-danger small">{{ form.description.errors|join:", " }}</div>{% endif %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ form.content.label }}</label>
+                {{ form.content }}
+                {% if form.content.errors %}<div class="text-danger small">{{ form.content.errors|join:", " }}</div>{% endif %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ form.department.label }}</label>
+                {{ form.department }}
+                {% if form.department.errors %}<div class="text-danger small">{{ form.department.errors|join:", " }}</div>{% endif %}
+            </div>
+            <div class="form-check">
+                {{ form.is_published }}
+                <label class="form-check-label" for="{{ form.is_published.id_for_label }}">{{ form.is_published.label }}</label>
+                {% if form.is_published.errors %}<div class="text-danger small">{{ form.is_published.errors|join:", " }}</div>{% endif %}
+            </div>
+        </div>
+
+        <div class="tutorial-form-section mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h2 class="h6 mb-0">{% trans "Uploaded Video" %}</h2>
+                <button type="button" id="remove-uploaded-video-btn" class="btn btn-sm btn-outline-danger">{% trans "Remove Video" %}</button>
+            </div>
+            {{ form.remove_video }}
+
+            {% if tutorial and tutorial.video_file %}
+                <div id="current-uploaded-video-block" class="alert alert-light border small">
+                    <strong>{% trans "Current uploaded video:" %}</strong>
+                    <a href="{{ tutorial.video_file.url }}" target="_blank" rel="noopener">{{ tutorial.video_file.name }}</a>
+                </div>
+            {% endif %}
+            <div id="remove-video-note" class="alert alert-warning small d-none mb-3">
+                {% trans "Uploaded video will be removed after you click Save." %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">{{ form.video_file.label }}</label>
+                {{ form.video_file }}
+                {% if form.video_file.help_text %}<div class="text-muted small">{{ form.video_file.help_text }}</div>{% endif %}
+                {% if form.video_file.errors %}<div class="text-danger small">{{ form.video_file.errors|join:", " }}</div>{% endif %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ form.video_caption.label }}</label>
+                {{ form.video_caption }}
+                {% if form.video_caption.help_text %}<div class="text-muted small">{{ form.video_caption.help_text }}</div>{% endif %}
+                {% if form.video_caption.errors %}<div class="text-danger small">{{ form.video_caption.errors|join:", " }}</div>{% endif %}
+            </div>
+        </div>
+
+        <div class="tutorial-form-section mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h2 class="h6 mb-0">{% trans "Video URLs" %}</h2>
+                <button class="btn btn-sm btn-outline-primary" type="button" id="add-video-url-form">+ {% trans "Add Video URL" %}</button>
+            </div>
+            <p class="text-muted small mb-1">
+                {% blocktrans with count=max_video_urls %}You can add up to {{ count }} video URLs per tutorial.{% endblocktrans %}
+            </p>
+            <p class="small mb-3">{% trans "Added video URLs:" %} <strong id="video-url-counter">0 / {{ max_video_urls }}</strong></p>
+            <p id="video-empty-state" class="text-muted small mb-3 d-none">{% trans "No video URLs yet." %}</p>
+
+            <div id="video-url-formset-container" data-prefix="{{ video_formset.prefix }}" data-max-forms="{{ max_video_urls }}">
+                {{ video_formset.management_form }}
+                {% for video_form in video_formset %}
+                    <div class="video-url-form-item border rounded-3 p-3 mb-2 bg-light-subtle">
+                        {% for hidden_field in video_form.hidden_fields %}{{ hidden_field }}{% endfor %}
+                        <div class="row g-2 align-items-end">
+                            {% for field in video_form.visible_fields %}
+                                {% if field.name == "DELETE" %}
+                                    <div class="d-none">{{ field }}</div>
+                                {% else %}
+                                    <div class="col-12 col-md-5">
+                                        <label class="form-label">{{ field.label }}</label>
+                                        {{ field }}
+                                        {% if field.errors %}<div class="text-danger small">{{ field.errors|join:", " }}</div>{% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-12 col-md-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100 js-remove-video-url">{% trans "Delete" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <template id="empty-video-url-form-template">
+                <div class="video-url-form-item border rounded-3 p-3 mb-2 bg-light-subtle">
+                    {% with video_form=video_formset.empty_form %}
+                        {% for hidden_field in video_form.hidden_fields %}{{ hidden_field }}{% endfor %}
+                        <div class="row g-2 align-items-end">
+                            {% for field in video_form.visible_fields %}
+                                {% if field.name == "DELETE" %}
+                                    <div class="d-none">{{ field }}</div>
+                                {% else %}
+                                    <div class="col-12 col-md-5">
+                                        <label class="form-label">{{ field.label }}</label>
+                                        {{ field }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-12 col-md-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100 js-remove-video-url">{% trans "Delete" %}</button>
+                            </div>
+                        </div>
+                    {% endwith %}
+                </div>
+            </template>
+            {% if video_formset.non_form_errors %}<div class="alert alert-danger mt-2">{{ video_formset.non_form_errors }}</div>{% endif %}
+        </div>
+
+        <div class="tutorial-form-section mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h2 class="h6 mb-0">{% trans "Photo Gallery" %}</h2>
+                <button class="btn btn-sm btn-outline-primary" type="button" id="add-image-form">+ {% trans "Add Photo" %}</button>
+            </div>
+            <p class="text-muted small mb-1">
+                {% blocktrans with count=max_images %}You can add up to {{ count }} photos per tutorial.{% endblocktrans %}
+            </p>
+            <p class="small mb-3">{% trans "Added photos:" %} <strong id="image-counter">0 / {{ max_images }}</strong></p>
+            <p id="image-empty-state" class="text-muted small mb-3 d-none">{% trans "No photos yet." %}</p>
+
+            <div id="image-formset-container" data-prefix="{{ formset.prefix }}" data-max-forms="{{ max_images }}">
+                {{ formset.management_form }}
+                {% for image_form in formset %}
+                    <div class="image-form-item border rounded-3 p-3 mb-2 bg-light-subtle">
+                        {% for hidden_field in image_form.hidden_fields %}{{ hidden_field }}{% endfor %}
+                        <div class="row g-2 align-items-end">
+                            {% for field in image_form.visible_fields %}
+                                {% if field.name == "DELETE" %}
+                                    <div class="d-none">{{ field }}</div>
+                                {% else %}
+                                    <div class="col-12 col-md-5">
+                                        <label class="form-label">{{ field.label }}</label>
+                                        {{ field }}
+                                        {% if field.errors %}<div class="text-danger small">{{ field.errors|join:", " }}</div>{% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-12 col-md-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100 js-remove-image">{% trans "Delete" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <template id="empty-image-form-template">
+                <div class="image-form-item border rounded-3 p-3 mb-2 bg-light-subtle">
+                    {% with image_form=formset.empty_form %}
+                        {% for hidden_field in image_form.hidden_fields %}{{ hidden_field }}{% endfor %}
+                        <div class="row g-2 align-items-end">
+                            {% for field in image_form.visible_fields %}
+                                {% if field.name == "DELETE" %}
+                                    <div class="d-none">{{ field }}</div>
+                                {% else %}
+                                    <div class="col-12 col-md-5">
+                                        <label class="form-label">{{ field.label }}</label>
+                                        {{ field }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-12 col-md-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100 js-remove-image">{% trans "Delete" %}</button>
+                            </div>
+                        </div>
+                    {% endwith %}
+                </div>
+            </template>
+            {% if formset.non_form_errors %}<div class="alert alert-danger mt-2">{{ formset.non_form_errors }}</div>{% endif %}
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
+            <a class="btn btn-outline-secondary" href="{% url 'knowledgebase:tutorial-list' %}">{% trans "Cancel" %}</a>
+        </div>
+    </form>
+</section>
+
+<script>
+    (() => {
+        const setupDynamicFormset = (opts) => {
+            const container = document.getElementById(opts.containerId);
+            const addButton = document.getElementById(opts.addButtonId);
+            const template = document.getElementById(opts.templateId);
+            const counter = document.getElementById(opts.counterId);
+            const emptyState = document.getElementById(opts.emptyStateId);
+            if (!container || !addButton || !template) return;
+
+            const prefix = container.dataset.prefix;
+            const maxForms = parseInt(container.dataset.maxForms || "0", 10);
+            const totalFormsInput = document.getElementById(`id_${prefix}-TOTAL_FORMS`);
+            if (!totalFormsInput) return;
+
+            const getCards = () => Array.from(container.querySelectorAll(opts.itemSelector));
+
+            const countActive = () => {
+                let active = 0;
+                getCards().forEach((card) => {
+                    const deleteCheckbox = card.querySelector("input[name$='-DELETE']");
+                    if (deleteCheckbox && deleteCheckbox.checked) {
+                        card.classList.add("d-none");
+                        return;
+                    }
+                    card.classList.remove("d-none");
+                    active += 1;
+                });
+                return active;
+            };
+
+            const updateUI = () => {
+                const active = countActive();
+                addButton.disabled = active >= maxForms;
+                if (counter) counter.textContent = `${active} / ${maxForms}`;
+                if (emptyState) emptyState.classList.toggle("d-none", active !== 0);
+            };
+
+            addButton.addEventListener("click", () => {
+                if (countActive() >= maxForms) {
+                    updateUI();
+                    return;
+                }
+                const formIndex = parseInt(totalFormsInput.value, 10);
+                const html = template.innerHTML.replace(/__prefix__/g, String(formIndex));
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = html.trim();
+                const newCard = wrapper.firstElementChild;
+                if (!newCard) return;
+                container.appendChild(newCard);
+                totalFormsInput.value = String(formIndex + 1);
+                updateUI();
+            });
+
+            container.addEventListener("click", (event) => {
+                const target = event.target;
+                if (!(target instanceof HTMLElement) || !target.classList.contains(opts.removeButtonClass)) return;
+                const card = target.closest(opts.itemSelector);
+                if (!card) return;
+                const deleteCheckbox = card.querySelector("input[name$='-DELETE']");
+                if (deleteCheckbox) deleteCheckbox.checked = true;
+                card.classList.add("d-none");
+                updateUI();
+            });
+
+            updateUI();
+        };
+
+        setupDynamicFormset({
+            containerId: "image-formset-container",
+            addButtonId: "add-image-form",
+            templateId: "empty-image-form-template",
+            counterId: "image-counter",
+            emptyStateId: "image-empty-state",
+            itemSelector: ".image-form-item",
+            removeButtonClass: "js-remove-image"
+        });
+
+        setupDynamicFormset({
+            containerId: "video-url-formset-container",
+            addButtonId: "add-video-url-form",
+            templateId: "empty-video-url-form-template",
+            counterId: "video-url-counter",
+            emptyStateId: "video-empty-state",
+            itemSelector: ".video-url-form-item",
+            removeButtonClass: "js-remove-video-url"
+        });
+
+        const removeUploadedVideoBtn = document.getElementById("remove-uploaded-video-btn");
+        const removeVideoInput = document.getElementById("id_remove_video");
+        const videoFileInput = document.getElementById("id_video_file");
+        const videoCaptionInput = document.getElementById("id_video_caption");
+        const currentUploadedVideoBlock = document.getElementById("current-uploaded-video-block");
+        const removeVideoNote = document.getElementById("remove-video-note");
+
+        if (removeUploadedVideoBtn) {
+            removeUploadedVideoBtn.addEventListener("click", () => {
+                if (videoFileInput) videoFileInput.value = "";
+                if (videoCaptionInput) videoCaptionInput.value = "";
+                if (removeVideoInput) removeVideoInput.value = "1";
+                if (currentUploadedVideoBlock) currentUploadedVideoBlock.classList.add("d-none");
+                if (removeVideoNote) removeVideoNote.classList.remove("d-none");
+            });
+        }
+
+        if (videoFileInput) {
+            videoFileInput.addEventListener("change", () => {
+                if (removeVideoInput) removeVideoInput.value = "";
+                if (removeVideoNote) removeVideoNote.classList.add("d-none");
+            });
+        }
+    })();
+</script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% trans "Knowledge Base" %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body class="kb-body">
+{% if user.is_authenticated %}
+<div class="kb-layout">
+    <aside class="kb-sidebar" id="kbSidebar">
+        <div class="kb-brand">
+            <div class="kb-brand-dot"></div>
+            <div class="kb-brand-text">
+                <span class="kb-brand-title">HubDesk</span>
+                <span class="kb-brand-subtitle">{% trans "Knowledge Base" %}</span>
+            </div>
+        </div>
+        {% include "includes/sidebar.html" %}
+    </aside>
+    <main class="kb-main">
+        <nav class="kb-topbar navbar navbar-expand-lg bg-white rounded-4 shadow-sm px-3 py-2">
+            <button class="btn btn-outline-secondary d-lg-none me-2" type="button" id="sidebarToggle">
+                {% trans "Menu" %}
+            </button>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <form action="{% url 'accounts:set-language' %}" method="post" class="d-flex align-items-center gap-2">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                    <label class="small text-muted mb-0" for="lang-switch">{% trans "Language" %}</label>
+                    <select id="lang-switch" name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                        {% get_current_language as CURRENT_LANGUAGE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                            <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANGUAGE %}selected{% endif %}>
+                                {{ lang_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'accounts:profile' %}">
+                    {{ user.display_name|default:user.username }}
+                </a>
+                <a class="btn btn-sm btn-danger" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
+            </div>
+        </nav>
+        {% include "includes/messages.html" %}
+        {% block content %}{% endblock %}
+    </main>
+</div>
+{% else %}
+<main class="container py-4">
+    <div class="d-flex justify-content-end mb-3">
+        <form action="{% url 'accounts:set-language' %}" method="post" class="d-flex align-items-center gap-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <label class="small text-muted mb-0" for="lang-switch-auth">{% trans "Language" %}</label>
+            <select id="lang-switch-auth" name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as LANGUAGES %}
+                {% for lang_code, lang_name in LANGUAGES %}
+                    <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANGUAGE %}selected{% endif %}>{{ lang_name }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    {% include "includes/messages.html" %}
+    {% block auth_content %}{% endblock %}
+</main>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const sidebar = document.getElementById("kbSidebar");
+    const toggleBtn = document.getElementById("sidebarToggle");
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener("click", () => sidebar.classList.toggle("open"));
+    }
+</script>
+</body>
+</html>

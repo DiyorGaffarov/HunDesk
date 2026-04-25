@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Tutorials" %}{% endblock %}
+
+{% block content %}
+<section class="kb-card">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <h1 class="h5 mb-0">{% trans "Tutorials" %}</h1>
+        {% if user.role == "ADMIN" or user.role == "EDITOR" %}
+            <a class="btn btn-primary" href="{% url 'knowledgebase:tutorial-create' %}">{% trans "Create Tutorial" %}</a>
+        {% endif %}
+    </div>
+
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-sm-10 col-md-8">
+            <input type="text" class="form-control" name="q" value="{{ query }}" placeholder="{% trans 'Search tutorials...' %}">
+        </div>
+        <div class="col-sm-2 col-md-2">
+            <button class="btn btn-outline-secondary w-100" type="submit">{% trans "Search" %}</button>
+        </div>
+    </form>
+
+    <div class="table-wrap">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Title" %}</th>
+                    <th>{% trans "Department" %}</th>
+                    <th>{% trans "Published" %}</th>
+                    <th>{% trans "Updated" %}</th>
+                    <th class="text-end">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tutorial in tutorials %}
+                    <tr>
+                        <td>{{ tutorial.title }}</td>
+                        <td>{{ tutorial.department.name }}</td>
+                        <td>
+                            {% if tutorial.is_published %}
+                                <span class="badge text-bg-success">{% trans "Yes" %}</span>
+                            {% else %}
+                                <span class="badge text-bg-secondary">{% trans "No" %}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ tutorial.updated_at|date:"Y-m-d H:i" }}</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-info" href="{% url 'knowledgebase:tutorial-detail' tutorial.id %}">{% trans "View" %}</a>
+                            {% if user.role == "ADMIN" or user.role == "EDITOR" and user.department_id == tutorial.department_id %}
+                                <a class="btn btn-sm btn-outline-primary" href="{% url 'knowledgebase:tutorial-edit' tutorial.id %}">{% trans "Edit" %}</a>
+                                <a class="btn btn-sm btn-outline-danger" href="{% url 'knowledgebase:tutorial-delete' tutorial.id %}">{% trans "Delete" %}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td class="text-center text-muted py-4" colspan="5">{% trans "No tutorials found." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

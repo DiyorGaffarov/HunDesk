@@ -1,0 +1,508 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: hubdesk-kb\n"
+"POT-Creation-Date: 2026-04-25 00:00+0000\n"
+"PO-Revision-Date: 2026-04-25 00:00+0000\n"
+"Last-Translator: HubDesk Team\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Add Photo"
+msgstr "Добавить фото"
+
+msgid "Admin"
+msgstr "Администратор"
+
+msgid "Admin Dashboard"
+msgstr "Панель администратора"
+
+msgid "Are you sure you want to delete \"%(name)s\" department?"
+msgstr "Вы уверены, что хотите удалить отдел \"%(name)s\"?"
+
+msgid "Are you sure you want to delete tutorial \"%(title)s\"?"
+msgstr "Вы уверены, что хотите удалить руководство \"%(title)s\"?"
+
+msgid "Are you sure you want to delete user \"%(username)s\"?"
+msgstr "Вы уверены, что хотите удалить пользователя \"%(username)s\"?"
+
+msgid "Available Tutorials"
+msgstr "Доступные руководства"
+
+msgid "By"
+msgstr "Автор"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Create Department"
+msgstr "Создать отдел"
+
+msgid "Create Tutorial"
+msgstr "Создать руководство"
+
+msgid "Create User"
+msgstr "Создать пользователя"
+
+msgid "Created At"
+msgstr "Создано"
+
+msgid "Dashboard"
+msgstr "Панель"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete Department"
+msgstr "Удалить отдел"
+
+msgid "Delete Tutorial"
+msgstr "Удалить руководство"
+
+msgid "Delete User"
+msgstr "Удалить пользователя"
+
+msgid "Department"
+msgstr "Отдел"
+
+msgid "Department created successfully."
+msgstr "Отдел успешно создан."
+
+msgid "Department deleted successfully."
+msgstr "Отдел успешно удален."
+
+msgid "Department is required for Editor and User roles."
+msgstr "Для ролей Editor и User отдел обязателен."
+
+msgid "Department updated successfully."
+msgstr "Отдел успешно обновлен."
+
+msgid "Department: %(department)s"
+msgstr "Отдел: %(department)s"
+
+msgid "Departments"
+msgstr "Отделы"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Edit"
+msgstr "Изменить"
+
+msgid "Edit Department"
+msgstr "Редактировать отдел"
+
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+msgid "Edit Tutorial"
+msgstr "Редактировать руководство"
+
+msgid "Edit User"
+msgstr "Редактировать пользователя"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Editor Dashboard"
+msgstr "Панель редактора"
+
+msgid "Editors"
+msgstr "Редакторы"
+
+msgid "Email"
+msgstr "Эл. почта"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Full Name"
+msgstr "Полное имя"
+
+msgid "HubDesk KB"
+msgstr "HubDesk База знаний"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "Knowledge Base"
+msgstr "База знаний"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Latest Tutorials"
+msgstr "Последние руководства"
+
+msgid "Login"
+msgstr "Вход"
+
+msgid "Logout"
+msgstr "Выход"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "My Profile"
+msgstr "Мой профиль"
+
+msgid "Name"
+msgstr "Название"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "No departments yet."
+msgstr "Отделов пока нет."
+
+msgid "No published tutorials yet."
+msgstr "Опубликованных руководств пока нет."
+
+msgid "No read history yet."
+msgstr "История чтения пока пуста."
+
+msgid "No tutorials found."
+msgstr "Руководства не найдены."
+
+msgid "No tutorials yet."
+msgstr "Руководств пока нет."
+
+msgid "No users found."
+msgstr "Пользователи не найдены."
+
+msgid "Overview of the whole knowledge base system."
+msgstr "Общий обзор всей системы базы знаний."
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Profile updated successfully."
+msgstr "Профиль успешно обновлен."
+
+msgid "Published"
+msgstr "Опубликовано"
+
+msgid "Published tutorials from your department and your reading activity."
+msgstr "Опубликованные руководства вашего отдела и ваша активность чтения."
+
+msgid "Read At"
+msgstr "Время прочтения"
+
+msgid "Recently Created Tutorials"
+msgstr "Недавно созданные руководства"
+
+msgid "Recently Read Tutorials"
+msgstr "Недавно прочитанные руководства"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "Russian"
+msgstr "Русский"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search by username, full name, email..."
+msgstr "Поиск по имени пользователя, полному имени, email..."
+
+msgid "Search tutorials..."
+msgstr "Искать руководства..."
+
+msgid "Sign in to your company knowledge base."
+msgstr "Войдите в корпоративную базу знаний."
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "Tutorial"
+msgstr "Руководство"
+
+msgid "Tutorial created successfully."
+msgstr "Руководство успешно создано."
+
+msgid "Tutorial deleted successfully."
+msgstr "Руководство успешно удалено."
+
+msgid "Tutorial updated successfully."
+msgstr "Руководство успешно обновлено."
+
+msgid "Tutorials"
+msgstr "Руководства"
+
+msgid "Tutorials in Department"
+msgstr "Руководства в отделе"
+
+msgid "Updated"
+msgstr "Обновлено"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "User '%(name)s' created successfully."
+msgstr "Пользователь '%(name)s' успешно создан."
+
+msgid "User '%(name)s' deleted successfully."
+msgstr "Пользователь '%(name)s' успешно удален."
+
+msgid "User Dashboard"
+msgstr "Панель пользователя"
+
+msgid "User Management"
+msgstr "Управление пользователями"
+
+msgid "User updated successfully."
+msgstr "Пользователь успешно обновлен."
+
+msgid "Username"
+msgstr "Имя пользователя"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Users in Department"
+msgstr "Пользователи отдела"
+
+msgid "You can add up to %(count)s photos per tutorial."
+msgstr "Можно добавить до %(count)s фото к одному руководству."
+
+msgid "You can add up to %(num)d photos per tutorial."
+msgstr "Можно добавить до %(num)d фото к одному руководству."
+
+msgid "Uzbek"
+msgstr "Узбекский"
+
+msgid "Video File"
+msgstr "Видео файл"
+
+msgid "Video URL"
+msgstr "Ссылка на видео"
+
+msgid "View"
+msgstr "Просмотр"
+
+msgid "Welcome back"
+msgstr "С возвращением"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "You cannot delete your own account."
+msgstr "Нельзя удалить свою учетную запись."
+
+msgid "caption"
+msgstr "подпись"
+
+msgid "content"
+msgstr "контент"
+
+msgid "created at"
+msgstr "создано"
+
+msgid "created by"
+msgstr "создано пользователем"
+
+msgid "department"
+msgstr "отдел"
+
+msgid "departments"
+msgstr "отделы"
+
+msgid "description"
+msgstr "описание"
+
+msgid "email address"
+msgstr "адрес эл. почты"
+
+msgid "full name"
+msgstr "полное имя"
+
+msgid "image"
+msgstr "изображение"
+
+msgid "is published"
+msgstr "опубликовано"
+
+msgid "name"
+msgstr "название"
+
+msgid "phone number"
+msgstr "номер телефона"
+
+msgid "profile photo"
+msgstr "фото профиля"
+
+msgid "read at"
+msgstr "прочитано в"
+
+msgid "read history"
+msgstr "история чтения"
+
+msgid "role"
+msgstr "роль"
+
+msgid "title"
+msgstr "заголовок"
+
+msgid "tutorial"
+msgstr "руководство"
+
+msgid "tutorial image"
+msgstr "изображение руководства"
+
+msgid "tutorial images"
+msgstr "изображения руководства"
+
+msgid "tutorials"
+msgstr "руководства"
+
+msgid "updated at"
+msgstr "обновлено"
+
+msgid "user"
+msgstr "пользователь"
+
+msgid "users"
+msgstr "пользователи"
+
+msgid "video file"
+msgstr "видео файл"
+
+msgid "video URL"
+msgstr "ссылка на видео"
+
+msgid "Added photos:"
+msgstr "Добавлено фото:"
+
+msgid "No video"
+msgstr "Без видео"
+
+msgid "Video file"
+msgstr "Видео файл"
+
+msgid "Video source"
+msgstr "Источник видео"
+
+msgid "Provide a public URL like YouTube/Vimeo."
+msgstr "Укажите публичную ссылку, например YouTube/Vimeo."
+
+msgid "Upload a local video file if you don't use a URL."
+msgstr "Загрузите локальный видеофайл, если не используете URL."
+
+msgid "Please provide a video URL."
+msgstr "Пожалуйста, укажите ссылку на видео."
+
+msgid "Please upload a video file."
+msgstr "Пожалуйста, загрузите видеофайл."
+
+msgid "Choose only one video source: URL or file."
+msgstr "Выберите только один источник видео: URL или файл."
+
+msgid "Tutorial Content"
+msgstr "Содержимое руководства"
+
+msgid "Video"
+msgstr "Видео"
+
+msgid "Choose one video source: URL, file, or none."
+msgstr "Выберите один источник видео: URL, файл или без видео."
+
+msgid "Photo Gallery"
+msgstr "Галерея фото"
+
+msgid "Manage tutorial images in one place."
+msgstr "Управляйте изображениями руководства в одном месте."
+
+msgid "Remove Photo"
+msgstr "Удалить фото"
+
+msgid "Undo Remove"
+msgstr "Отменить удаление"
+
+msgid "No photos yet."
+msgstr "Фото пока нет."
+
+msgid "Remove Video"
+msgstr "Удалить видео"
+
+msgid "Current video URL:"
+msgstr "Текущая ссылка на видео:"
+
+msgid "Current uploaded video:"
+msgstr "Текущее загруженное видео:"
+
+msgid "Only one video URL is allowed."
+msgstr "Разрешена только одна ссылка на видео."
+
+msgid "Uploaded Video"
+msgstr "Загруженное видео"
+
+msgid "Video URLs"
+msgstr "Ссылки на видео"
+
+msgid "Add Video URL"
+msgstr "Добавить ссылку на видео"
+
+msgid "Added video URLs:"
+msgstr "Добавлено ссылок на видео:"
+
+msgid "No video URLs yet."
+msgstr "Ссылок на видео пока нет."
+
+msgid "You can add up to %(count)s video URLs per tutorial."
+msgstr "Можно добавить до %(count)s ссылок на видео к одному руководству."
+
+msgid "You can add up to %(num)d video URLs per tutorial."
+msgstr "Можно добавить до %(num)d ссылок на видео к одному руководству."
+
+msgid "Current uploaded video:"
+msgstr "Текущее загруженное видео:"
+
+msgid "Caption"
+msgstr "Подпись"
+
+msgid "Caption for uploaded video"
+msgstr "Подпись к загруженному видео"
+
+msgid "Upload one video file (optional)."
+msgstr "Загрузите один видеофайл (необязательно)."
+
+msgid "Short caption for uploaded video."
+msgstr "Короткая подпись к загруженному видео."
+
+msgid "Only one video URL is allowed per row."
+msgstr "В одной строке разрешена только одна ссылка на видео."
+
+msgid "video caption"
+msgstr "подпись к видео"
+
+msgid "tutorial video"
+msgstr "видео руководства"
+
+msgid "tutorial videos"
+msgstr "видео руководства"
+
+msgid "Use either uploaded video or video URLs, not both."
+msgstr "Используйте либо загруженное видео, либо ссылки на видео, но не вместе."
+
+msgid "Uploaded video will be removed after you click Save."
+msgstr "Загруженное видео будет удалено после нажатия Сохранить."

@@ -1,0 +1,507 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: hubdesk-kb\n"
+"POT-Creation-Date: 2026-04-25 00:00+0000\n"
+"PO-Revision-Date: 2026-04-25 00:00+0000\n"
+"Last-Translator: HubDesk Team\n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Actions"
+msgstr "Amallar"
+
+msgid "Add Photo"
+msgstr "Rasm qo'shish"
+
+msgid "Admin"
+msgstr "Administrator"
+
+msgid "Admin Dashboard"
+msgstr "Administrator paneli"
+
+msgid "Are you sure you want to delete \"%(name)s\" department?"
+msgstr "\"%(name)s\" bo'limini o'chirishni tasdiqlaysizmi?"
+
+msgid "Are you sure you want to delete tutorial \"%(title)s\"?"
+msgstr "\"%(title)s\" qo'llanmasini o'chirishni tasdiqlaysizmi?"
+
+msgid "Are you sure you want to delete user \"%(username)s\"?"
+msgstr "\"%(username)s\" foydalanuvchisini o'chirishni tasdiqlaysizmi?"
+
+msgid "Available Tutorials"
+msgstr "Mavjud qo'llanmalar"
+
+msgid "By"
+msgstr "Muallif"
+
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+msgid "Create Department"
+msgstr "Bo'lim yaratish"
+
+msgid "Create Tutorial"
+msgstr "Qo'llanma yaratish"
+
+msgid "Create User"
+msgstr "Foydalanuvchi yaratish"
+
+msgid "Created At"
+msgstr "Yaratilgan vaqti"
+
+msgid "Dashboard"
+msgstr "Boshqaruv paneli"
+
+msgid "Delete"
+msgstr "O'chirish"
+
+msgid "Delete Department"
+msgstr "Bo'limni o'chirish"
+
+msgid "Delete Tutorial"
+msgstr "Qo'llanmani o'chirish"
+
+msgid "Delete User"
+msgstr "Foydalanuvchini o'chirish"
+
+msgid "Department"
+msgstr "Bo'lim"
+
+msgid "Department created successfully."
+msgstr "Bo'lim muvaffaqiyatli yaratildi."
+
+msgid "Department deleted successfully."
+msgstr "Bo'lim muvaffaqiyatli o'chirildi."
+
+msgid "Department is required for Editor and User roles."
+msgstr "Editor va User rollari uchun bo'lim majburiy."
+
+msgid "Department updated successfully."
+msgstr "Bo'lim muvaffaqiyatli yangilandi."
+
+msgid "Department: %(department)s"
+msgstr "Bo'lim: %(department)s"
+
+msgid "Departments"
+msgstr "Bo'limlar"
+
+msgid "Description"
+msgstr "Tavsif"
+
+msgid "Edit"
+msgstr "Tahrirlash"
+
+msgid "Edit Department"
+msgstr "Bo'limni tahrirlash"
+
+msgid "Edit Profile"
+msgstr "Profilni tahrirlash"
+
+msgid "Edit Tutorial"
+msgstr "Qo'llanmani tahrirlash"
+
+msgid "Edit User"
+msgstr "Foydalanuvchini tahrirlash"
+
+msgid "Editor"
+msgstr "Muharrir"
+
+msgid "Editor Dashboard"
+msgstr "Muharrir paneli"
+
+msgid "Editors"
+msgstr "Muharrirlar"
+
+msgid "Email"
+msgstr "Elektron pochta"
+
+msgid "English"
+msgstr "Inglizcha"
+
+msgid "Full Name"
+msgstr "To'liq ism"
+
+msgid "HubDesk KB"
+msgstr "HubDesk Bilim Bazasi"
+
+msgid "Images"
+msgstr "Rasmlar"
+
+msgid "Knowledge Base"
+msgstr "Bilim bazasi"
+
+msgid "Language"
+msgstr "Til"
+
+msgid "Latest Tutorials"
+msgstr "So'nggi qo'llanmalar"
+
+msgid "Login"
+msgstr "Kirish"
+
+msgid "Logout"
+msgstr "Chiqish"
+
+msgid "Menu"
+msgstr "Menyu"
+
+msgid "My Profile"
+msgstr "Mening profilim"
+
+msgid "Name"
+msgstr "Nomi"
+
+msgid "No"
+msgstr "Yo'q"
+
+msgid "No departments yet."
+msgstr "Hozircha bo'limlar yo'q."
+
+msgid "No published tutorials yet."
+msgstr "Hozircha chop etilgan qo'llanmalar yo'q."
+
+msgid "No read history yet."
+msgstr "Hozircha o'qish tarixi yo'q."
+
+msgid "No tutorials found."
+msgstr "Qo'llanmalar topilmadi."
+
+msgid "No tutorials yet."
+msgstr "Hozircha qo'llanmalar yo'q."
+
+msgid "No users found."
+msgstr "Foydalanuvchilar topilmadi."
+
+msgid "Overview of the whole knowledge base system."
+msgstr "Bilim bazasi tizimining umumiy ko'rinishi."
+
+msgid "Password"
+msgstr "Parol"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Profile updated successfully."
+msgstr "Profil muvaffaqiyatli yangilandi."
+
+msgid "Published"
+msgstr "Chop etilgan"
+
+msgid "Published tutorials from your department and your reading activity."
+msgstr "Bo'limingizdagi chop etilgan qo'llanmalar va o'qish faolligingiz."
+
+msgid "Read At"
+msgstr "O'qilgan vaqt"
+
+msgid "Recently Created Tutorials"
+msgstr "Yaqinda yaratilgan qo'llanmalar"
+
+msgid "Recently Read Tutorials"
+msgstr "Yaqinda o'qilgan qo'llanmalar"
+
+msgid "Role"
+msgstr "Rol"
+
+msgid "Russian"
+msgstr "Ruscha"
+
+msgid "Save"
+msgstr "Saqlash"
+
+msgid "Save Changes"
+msgstr "O'zgarishlarni saqlash"
+
+msgid "Search"
+msgstr "Qidirish"
+
+msgid "Search by username, full name, email..."
+msgstr "Username, to'liq ism, email bo'yicha qidiring..."
+
+msgid "Search tutorials..."
+msgstr "Qo'llanmalarni qidiring..."
+
+msgid "Sign in to your company knowledge base."
+msgstr "Kompaniya bilim bazasiga kiring."
+
+msgid "Title"
+msgstr "Sarlavha"
+
+msgid "Tutorial"
+msgstr "Qo'llanma"
+
+msgid "Tutorial created successfully."
+msgstr "Qo'llanma muvaffaqiyatli yaratildi."
+
+msgid "Tutorial deleted successfully."
+msgstr "Qo'llanma muvaffaqiyatli o'chirildi."
+
+msgid "Tutorial updated successfully."
+msgstr "Qo'llanma muvaffaqiyatli yangilandi."
+
+msgid "Tutorials"
+msgstr "Qo'llanmalar"
+
+msgid "Tutorials in Department"
+msgstr "Bo'limdagi qo'llanmalar"
+
+msgid "Updated"
+msgstr "Yangilangan"
+
+msgid "User"
+msgstr "Foydalanuvchi"
+
+msgid "User '%(name)s' created successfully."
+msgstr "'%(name)s' foydalanuvchisi muvaffaqiyatli yaratildi."
+
+msgid "User '%(name)s' deleted successfully."
+msgstr "'%(name)s' foydalanuvchisi muvaffaqiyatli o'chirildi."
+
+msgid "User Dashboard"
+msgstr "Foydalanuvchi paneli"
+
+msgid "User Management"
+msgstr "Foydalanuvchilarni boshqarish"
+
+msgid "User updated successfully."
+msgstr "Foydalanuvchi muvaffaqiyatli yangilandi."
+
+msgid "Username"
+msgstr "Foydalanuvchi nomi"
+
+msgid "Users"
+msgstr "Foydalanuvchilar"
+
+msgid "Users in Department"
+msgstr "Bo'limdagi foydalanuvchilar"
+
+msgid "You can add up to %(count)s photos per tutorial."
+msgstr "Har bir qo'llanmaga %(count)s tagacha rasm qo'shish mumkin."
+
+msgid "You can add up to %(num)d photos per tutorial."
+msgstr "Har bir qo'llanmaga %(num)d tagacha rasm qo'shish mumkin."
+
+msgid "Uzbek"
+msgstr "O'zbekcha"
+
+msgid "Video File"
+msgstr "Video fayl"
+
+msgid "Video URL"
+msgstr "Video havola"
+
+msgid "View"
+msgstr "Ko'rish"
+
+msgid "Welcome back"
+msgstr "Xush kelibsiz"
+
+msgid "Yes"
+msgstr "Ha"
+
+msgid "You cannot delete your own account."
+msgstr "O'zingizning akkauntingizni o'chira olmaysiz."
+
+msgid "caption"
+msgstr "izoh"
+
+msgid "content"
+msgstr "kontent"
+
+msgid "created at"
+msgstr "yaratilgan vaqti"
+
+msgid "created by"
+msgstr "muallif"
+
+msgid "department"
+msgstr "bo'lim"
+
+msgid "departments"
+msgstr "bo'limlar"
+
+msgid "description"
+msgstr "tavsif"
+
+msgid "email address"
+msgstr "email manzili"
+
+msgid "full name"
+msgstr "to'liq ism"
+
+msgid "image"
+msgstr "rasm"
+
+msgid "is published"
+msgstr "chop etilgan"
+
+msgid "name"
+msgstr "nomi"
+
+msgid "phone number"
+msgstr "telefon raqami"
+
+msgid "profile photo"
+msgstr "profil rasmi"
+
+msgid "read at"
+msgstr "o'qilgan vaqt"
+
+msgid "read history"
+msgstr "o'qish tarixi"
+
+msgid "role"
+msgstr "rol"
+
+msgid "title"
+msgstr "sarlavha"
+
+msgid "tutorial"
+msgstr "qo'llanma"
+
+msgid "tutorial image"
+msgstr "qo'llanma rasmi"
+
+msgid "tutorial images"
+msgstr "qo'llanma rasmlari"
+
+msgid "tutorials"
+msgstr "qo'llanmalar"
+
+msgid "updated at"
+msgstr "yangilangan vaqti"
+
+msgid "user"
+msgstr "foydalanuvchi"
+
+msgid "users"
+msgstr "foydalanuvchilar"
+
+msgid "video file"
+msgstr "video fayl"
+
+msgid "video URL"
+msgstr "video havola"
+
+msgid "Added photos:"
+msgstr "Qo'shilgan rasmlar:"
+
+msgid "No video"
+msgstr "Videosiz"
+
+msgid "Video file"
+msgstr "Video fayl"
+
+msgid "Video source"
+msgstr "Video manbasi"
+
+msgid "Provide a public URL like YouTube/Vimeo."
+msgstr "YouTube/Vimeo kabi ommaviy havolani kiriting."
+
+msgid "Upload a local video file if you don't use a URL."
+msgstr "Agar URL ishlatmasangiz, lokal video fayl yuklang."
+
+msgid "Please provide a video URL."
+msgstr "Iltimos, video havolasini kiriting."
+
+msgid "Please upload a video file."
+msgstr "Iltimos, video fayl yuklang."
+
+msgid "Choose only one video source: URL or file."
+msgstr "Faqat bitta video manbasini tanlang: URL yoki fayl."
+
+msgid "Tutorial Content"
+msgstr "Qo'llanma mazmuni"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "Choose one video source: URL, file, or none."
+msgstr "Bitta video manbasini tanlang: URL, fayl yoki videosiz."
+
+msgid "Photo Gallery"
+msgstr "Foto galereya"
+
+msgid "Manage tutorial images in one place."
+msgstr "Qo'llanma rasmlarini bitta joyda boshqaring."
+
+msgid "Remove Photo"
+msgstr "Rasmni o'chirish"
+
+msgid "Undo Remove"
+msgstr "O'chirishni bekor qilish"
+
+msgid "No photos yet."
+msgstr "Hozircha rasm yo'q."
+
+msgid "Remove Video"
+msgstr "Videoni o'chirish"
+
+msgid "Current video URL:"
+msgstr "Joriy video havola:"
+
+msgid "Current uploaded video:"
+msgstr "Joriy yuklangan video:"
+
+msgid "Only one video URL is allowed."
+msgstr "Faqat bitta video havolaga ruxsat beriladi."
+
+msgid "Uploaded Video"
+msgstr "Yuklangan video"
+
+msgid "Video URLs"
+msgstr "Video havolalar"
+
+msgid "Add Video URL"
+msgstr "Video havola qo'shish"
+
+msgid "Added video URLs:"
+msgstr "Qo'shilgan video havolalar:"
+
+msgid "No video URLs yet."
+msgstr "Hozircha video havolalar yo'q."
+
+msgid "You can add up to %(count)s video URLs per tutorial."
+msgstr "Har bir qo'llanmaga %(count)s tagacha video havola qo'shish mumkin."
+
+msgid "You can add up to %(num)d video URLs per tutorial."
+msgstr "Har bir qo'llanmaga %(num)d tagacha video havola qo'shish mumkin."
+
+msgid "Current uploaded video:"
+msgstr "Joriy yuklangan video:"
+
+msgid "Caption"
+msgstr "Izoh"
+
+msgid "Caption for uploaded video"
+msgstr "Yuklangan video uchun izoh"
+
+msgid "Upload one video file (optional)."
+msgstr "Bitta video fayl yuklang (ixtiyoriy)."
+
+msgid "Short caption for uploaded video."
+msgstr "Yuklangan video uchun qisqa izoh."
+
+msgid "Only one video URL is allowed per row."
+msgstr "Har bir qatorda faqat bitta video havolaga ruxsat beriladi."
+
+msgid "video caption"
+msgstr "video izohi"
+
+msgid "tutorial video"
+msgstr "qo'llanma videosi"
+
+msgid "tutorial videos"
+msgstr "qo'llanma videolari"
+
+msgid "Use either uploaded video or video URLs, not both."
+msgstr "Yuklangan video yoki video havolalardan birini tanlang, ikkalasini birga emas."
+
+msgid "Uploaded video will be removed after you click Save."
+msgstr "Saqlash tugmasini bosgandan so'ng yuklangan video o'chiriladi."

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ tutorial.title }}{% endblock %}
+
+{% block content %}
+<article class="kb-card">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+        <div>
+            <h1 class="h4 mb-1">{{ tutorial.title }}</h1>
+            <div class="text-muted small">
+                {{ tutorial.department.name }} | {% trans "By" %} {{ tutorial.created_by.display_name|default:tutorial.created_by.username }}
+            </div>
+        </div>
+        {% if user.role == "ADMIN" or user.role == "EDITOR" and user.department_id == tutorial.department_id %}
+        <div class="d-flex gap-2">
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'knowledgebase:tutorial-edit' tutorial.id %}">{% trans "Edit" %}</a>
+            <a class="btn btn-sm btn-outline-danger" href="{% url 'knowledgebase:tutorial-delete' tutorial.id %}">{% trans "Delete" %}</a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if tutorial.description %}
+        <p class="lead">{{ tutorial.description }}</p>
+    {% endif %}
+
+    <div class="border rounded-3 p-3 bg-white mb-3">
+        {{ tutorial.content|linebreaks }}
+    </div>
+
+    {% if tutorial.video_file %}
+        <div class="mb-3">
+            <h2 class="h6">{% trans "Uploaded Video" %}</h2>
+            <video src="{{ tutorial.video_file.url }}" controls class="w-100 rounded-3 border" style="max-height: 420px;"></video>
+            {% if tutorial.video_caption %}
+                <p class="small text-muted mt-2 mb-0">{{ tutorial.video_caption }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if tutorial.video_links.all %}
+        <div class="mb-3">
+            <h2 class="h6">{% trans "Video URLs" %}</h2>
+            <div class="table-wrap">
+                <table class="table table-sm table-hover mb-0">
+                    <thead class="table-light">
+                    <tr>
+                        <th>{% trans "Video URL" %}</th>
+                        <th>{% trans "Caption" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for video in tutorial.video_links.all %}
+                        <tr>
+                            <td><a href="{{ video.video_url }}" target="_blank" rel="noopener">{{ video.video_url }}</a></td>
+                            <td>{{ video.caption|default:"-" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="2" class="text-muted text-center py-3">{% trans "No video URLs yet." %}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if tutorial.video_url %}
+        <div class="mb-3">
+            <h2 class="h6">{% trans "Video URL" %}</h2>
+            <a href="{{ tutorial.video_url }}" target="_blank" rel="noopener">{{ tutorial.video_url }}</a>
+        </div>
+    {% endif %}
+
+    {% if tutorial.images.all %}
+        <div class="row g-3 mt-1">
+            {% for image in tutorial.images.all %}
+            <div class="col-md-6 col-lg-4">
+                <div class="border rounded-3 p-2 h-100 bg-white">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:tutorial.title }}" class="img-fluid rounded-2 mb-2">
+                    {% if image.caption %}<p class="small text-muted mb-0">{{ image.caption }}</p>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</article>
+{% endblock %}
